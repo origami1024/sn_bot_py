@@ -13,7 +13,7 @@ import re
 from config import tg_token
 from config import chat_id
 
-url = "https://api.telegram.org/bot" + tg_token + "/"
+url = "https://api.telegram.org/bot" + tg_token + "/sendPhoto"
 
 title = u"Электрик"
 sal = u'100 - 200 m'
@@ -45,8 +45,6 @@ draw = ImageDraw.Draw(img)
 font = ImageFont.truetype("BebasNeue.ttf", 16)
 
 
-
-
 draw.text((10, 10),title,(255,255,255), font=font)
 draw.text((10, 50),sal,(255,255,255), font=font)
 draw.text((160, 50),city,(255,255,255), font=font)
@@ -55,9 +53,8 @@ draw.text((10, 130),desc2,(255,255,255), font=font)
 img.save('./../sample-out.png')
 
 
-sendPhotoPath = 'sendPhoto'
 files = {'photo': open('./../sample-out.png', 'rb')}
 
 data = {'chat_id' : chat_id, 'caption': title + " (https://hunarmen.com/jobpage?id=" + jid + ")"}
 
-r = requests.post(url + sendPhotoPath, files=files, data=data)
+r = requests.post(url, files=files, data=data)
